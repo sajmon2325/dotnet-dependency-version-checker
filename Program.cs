@@ -4,23 +4,20 @@ using dotnet_dependency_version_checker.ProjectFileVerification;
 
 Console.WriteLine(TextContent.MainTitle);
 
-// Console.WriteLine(TextContent.CsprojFilePrompt);
-//
-// var csProjFilePath = Console.ReadLine();
 var menuOptionControls = new MenuOptionControls();
 var displayMainMenu = true;
 
-var csProjFilePath = menuOptionControls.DisplayProjFilePathPrompt();
-
 do
 {
+    var csProjFilePath = menuOptionControls.DisplayProjFilePathPrompt();
+
     if (ProjectFileVerifier.IsValidCsprojPath(csProjFilePath))
     {
         
     }
     else
     {
-        menuOptionControls.HandleInvalidProjPathPrompt(csProjFilePath, ShowMainMenu);
+        MenuOptionControls.HandleInvalidProjPathPrompt(ShowMainMenu);
     }
 } while (displayMainMenu);
 Environment.Exit(0);

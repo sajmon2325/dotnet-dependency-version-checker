@@ -10,28 +10,56 @@ public class MenuOptionControls
         return  Console.ReadLine();
     }
 
-    public void HandleInvalidProjPathPrompt(string? csProjFilePath, Action<bool> showMenu)
+    public static void HandleInvalidProjPathPrompt(Action<bool> showMenu)
     {
-        var menuOptionControls = new MenuOptionControls();
+        Console.WriteLine($"The provided path is not valid or does not point to a .csproj file. \n");
+        DisplayInvalidProjPathMenuControls();
         
-        Console.WriteLine($"The provided path '{csProjFilePath}' is not valid or does not point to a .csproj file. \n");
-        Console.WriteLine("Back: b");
-        Console.WriteLine("Exit application: e \n");
+        var displayMenu = true;
+        do
+        {
+
+            var menuChoice = Console.ReadLine();
         
-        var menuChoice = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(menuChoice))
+            {
+                Console.WriteLine($"Invalid option. Please select '{TextContent.BackOption}' or '{TextContent.ExitOption}'.\n");
+                return;
+            }
         
-        if (menuChoice == null || string.Equals(menuChoice.ToLower(), "e"))
-        {
-            showMenu(false);
-        } else if (string.Equals(menuChoice.ToLower(), "b"))
-        {
-            menuOptionControls.DisplayProjFilePathPrompt();
-            //Handle situaltion if the user inputs correct / uncorrect path
-        }
-        else
-        {
-            Console.WriteLine($"Invalid option. Option '{menuChoice}' does not exist \n");
-            menuOptionControls.DisplayProjFilePathPrompt();
-        }
+            switch (menuChoice.Trim().ToLower())
+            {
+                case TextContent.ExitOption:
+                    displayMenu = false;
+                    showMenu(false);
+                    break;
+                case TextContent.BackOption:
+                    //Control is passed back to the main loop in Program.cs
+                    displayMenu = false;
+                    break;
+                default:
+                    Console.WriteLine($"Invalid menu option. Option '{menuChoice}' does not exist.\n");
+                    DisplayInvalidProjPathMenuControls();
+                    displayMenu = true;
+                    break;
+            }
+        } while (displayMenu);
+
     }
+    
+    private static void DisplayInvalidProjPathMenuControls()
+    {
+        Console.WriteLine($"Back: {TextContent.BackOption}");
+        Console.WriteLine($"Exit application: {TextContent.ExitOption}\n");
+    }
+
+    public string HandleDependencyVersionCheck(string path)
+    {
+        // Step 1: call XML service that will parse provided XML file and extract dependency versions
+        // Step 2: call NugetAPI to get latest or stable versions of dependencies extracted in step 1
+        // Step 3: compare those versions and display all dependencies that are outdated
+        return "";
+    }
+
+
 }
