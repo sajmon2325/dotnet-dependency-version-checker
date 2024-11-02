@@ -1,4 +1,5 @@
 using dotnet_dependency_version_checker.content;
+using dotnet_dependency_version_checker.service;
 
 namespace dotnet_dependency_version_checker.MenuOptions;
 
@@ -12,7 +13,7 @@ public class MenuOptionControls
 
     public static void HandleInvalidProjPathPrompt(Action<bool> showMenu)
     {
-        Console.WriteLine($"The provided path is not valid or does not point to a .csproj file. \n");
+        Console.WriteLine(TextContent.InvalidProjPathWarning);
         DisplayInvalidProjPathMenuControls();
         
         var displayMenu = true;
@@ -53,9 +54,11 @@ public class MenuOptionControls
         Console.WriteLine($"Exit application: {TextContent.ExitOption}\n");
     }
 
-    public string HandleDependencyVersionCheck(string path)
+    public string HandleDisplayDependencyVersionCheck(string path)
     {
-        // Step 1: call XML service that will parse provided XML file and extract dependency versions
+        // Step 1: call ProjFile service that will parse provided XML file and extract dependency versions
+        var projFileService = new ProjFileService();
+        var dependencyList = projFileService.ParseProjFile(path);
         // Step 2: call NugetAPI to get latest or stable versions of dependencies extracted in step 1
         // Step 3: compare those versions and display all dependencies that are outdated
         return "";
