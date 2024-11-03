@@ -54,12 +54,14 @@ public class MenuOptionControls
         Console.WriteLine($"Exit application: {TextContent.ExitOption}\n");
     }
 
-    public string HandleDisplayDependencyVersionCheck(string path)
+    public async Task<string> HandleDisplayDependencyVersionCheck(string path)
     {
         // Step 1: call ProjFile service that will parse provided XML file and extract dependency versions
         var projFileService = new ProjFileService();
         var dependencyList = projFileService.ParseProjFile(path);
         // Step 2: call NugetAPI to get latest or stable versions of dependencies extracted in step 1
+        var nugetApiClient = new NugetApiClient();
+        var dependencyVersionList = await nugetApiClient.GetDependencyVersions(dependencyList.Keys);
         // Step 3: compare those versions and display all dependencies that are outdated
         return "";
     }
