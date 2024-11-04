@@ -8,6 +8,9 @@ public class NugetApiClient
     private const string ServiceIndexUrl = "https://api.nuget.org/v3/index.json";
     private const string ServiceIndexUrlSuffix = "/index.json";
 
+    /// <summary>
+    /// Fetches the service index url from Nuget API endpoint
+    /// </summary>
     private async Task<string?> GetServiceIndexUrl()
     {
         try
@@ -39,6 +42,10 @@ public class NugetApiClient
 
         return null;
     }
+    /// <summary>
+    /// Takes the collection of project dependency names and fetches version numbers from Nuget API
+    /// </summary>
+    /// <param name="packageNames">Collection of full names of project dependencies</param>
     public async Task<Dictionary<string, List<string>>> GetDependencyVersions(IEnumerable<string> packageNames)
     {
         var result = new Dictionary<string, List<string>>();
