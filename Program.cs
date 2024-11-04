@@ -13,7 +13,7 @@ do
 
     if (ProjectFileVerifier.IsValidCsprojPath(csProjFilePath))
     {
-        menuOptionControls.HandleDisplayDependencyVersionCheck(csProjFilePath);
+        await menuOptionControls.HandleDisplayDependencyVersionCheck(csProjFilePath);
     }
     else
     {
@@ -21,6 +21,7 @@ do
     }
 } while (displayMainMenu);
 Environment.Exit(0);
+return;
 
 
 void ShowMainMenu(bool showMainMenu)

@@ -41,6 +41,7 @@ public class NugetApiClient
     }
     public async Task<Dictionary<string, List<string>>> GetDependencyVersions(IEnumerable<string> packageNames)
     {
+        var result = new Dictionary<string, List<string>>();
         var packageBaseAddress = await GetServiceIndexUrl();
 
         if (string.IsNullOrEmpty(packageBaseAddress))
@@ -53,7 +54,19 @@ public class NugetApiClient
             var url = $"{packageBaseAddress}{packageName.ToLower()}{ServiceIndexUrlSuffix}";
             using var client = new HttpClient();
             var response = await client.GetStringAsync(url);
-            //TODO implement the rest of the method
+            
+            var jsonResponse = JsonDocument.Parse(response);
+            var rootElement = jsonResponse.RootElement;
+
+            if (!rootElement.TryGetProperty("versions", out JsonElement versions))
+            {
+                throw new InvalidOperationException("The 'versions' array is missing in the NuGet API response.");
+            }
+            
+            result.Add(packageName, versions.EnumerateArray().ToList().Select(version => version.ToString()).ToList());
+            return result;
         }
+
+        return result;
     }
 }
