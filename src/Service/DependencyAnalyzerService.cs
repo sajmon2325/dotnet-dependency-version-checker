@@ -8,7 +8,7 @@ public class DependencyAnalyzerService
     /// <summary>
     /// Checks each project dependency and its current version to determine if a newer stable version is available.
     /// If a newer version exists, mark the dependency as outdated.
-    /// If the current version is the latest, mark the dependency as up-to-date.
+    /// If the current version is the latest, mark the dependency as up to date.
     /// If a newer preview version is available, include it as additional information.
     /// </summary>
     /// <param name="dependencyList">List of project dependencies with version number</param>
