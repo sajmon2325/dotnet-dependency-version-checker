@@ -1,6 +1,7 @@
 ﻿using dotnet_dependency_version_checker.content;
 using dotnet_dependency_version_checker.MenuOptions;
 using dotnet_dependency_version_checker.ProjectFileVerification;
+using dotnet_dependency_version_checker.service.ReportGenerator;
 
 Console.WriteLine(TextContent.MainTitle);
 
@@ -14,6 +15,14 @@ do
     if (ProjectFileVerifier.IsValidCsprojPath(csProjFilePath))
     {
         var dependencyInformation = await menuOptionControls.HandleDisplayDependencyVersionCheck(csProjFilePath);
+        Console.WriteLine("\n");
+
+        // Generate console report for the result of dependency analysis
+        var consoleReportGenerator = new ConsoleReportGenerator();
+        consoleReportGenerator.GenerateReport(dependencyInformation);
+        
+        // Display menu option to generate web report for dependency analysis
+        ShowMainMenu(false);
     }
     else
     {
