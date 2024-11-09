@@ -1,10 +1,8 @@
-using System.Text.RegularExpressions;
 using dotnet_dependency_version_checker.model;
 
 namespace dotnet_dependency_version_checker.service;
 
-public class DependencyAnalyzerService
-{
+public class DependencyAnalyzerService {
     /// <summary>
     /// Checks each project dependency and its current version to determine if a newer stable version is available.
     /// If a newer version exists, mark the dependency as outdated.
@@ -16,7 +14,7 @@ public class DependencyAnalyzerService
     public List<DependencyInformation> AnalyzeDependencies(
     Dictionary<string, string> dependencyList,
     Dictionary<string, List<string>> dependencyVersionList)
-{
+    {
     var analysisResult = new List<DependencyInformation>();
 
     foreach (var (dependencyName, currentVersion) in dependencyList)
@@ -60,31 +58,13 @@ public class DependencyAnalyzerService
             {
                 DependencyName = dependencyName,
                 CurrentVersion = currentVersion,
-                LatestStableVersion = "N/A",
-                LatestPreviewVersion = "N/A",
+                LatestStableVersion = "Version not found",
+                LatestPreviewVersion = "Version not found",
                 IsUpToDate = false
             });
         }
     }
 
     return analysisResult;
-}
-
-        // Helper method to compare version strings (returns -1 if v1 < v2, 0 if equal, 1 if v1 > v2)
-        private int CompareVersions(string version1, string version2)
-        {
-            var v1Parts = version1.Split('.').Select(int.Parse).ToArray();
-            var v2Parts = version2.Split('.').Select(int.Parse).ToArray();
-
-            int length = Math.Max(v1Parts.Length, v2Parts.Length);
-            for (int i = 0; i < length; i++)
-            {
-                int part1 = i < v1Parts.Length ? v1Parts[i] : 0;
-                int part2 = i < v2Parts.Length ? v2Parts[i] : 0;
-
-                if (part1 < part2) return -1;
-                if (part1 > part2) return 1;
-            }
-            return 0;
-        }
+    }
 }
