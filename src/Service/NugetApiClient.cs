@@ -71,7 +71,6 @@ public class NugetApiClient
             }
             
             result.Add(packageName, versions.EnumerateArray().ToList().Select(version => version.ToString()).ToList());
-            return result;
         }
 
         return result;
