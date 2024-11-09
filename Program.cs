@@ -13,13 +13,14 @@ do
 
     if (ProjectFileVerifier.IsValidCsprojPath(csProjFilePath))
     {
-        await menuOptionControls.HandleDisplayDependencyVersionCheck(csProjFilePath);
+        var dependencyInformation = await menuOptionControls.HandleDisplayDependencyVersionCheck(csProjFilePath);
     }
     else
     {
         MenuOptionControls.HandleInvalidProjPathPrompt(ShowMainMenu);
     }
 } while (displayMainMenu);
+
 Environment.Exit(0);
 return;
 

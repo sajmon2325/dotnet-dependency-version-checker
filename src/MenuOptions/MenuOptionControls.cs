@@ -1,4 +1,5 @@
 using dotnet_dependency_version_checker.content;
+using dotnet_dependency_version_checker.model;
 using dotnet_dependency_version_checker.service;
 
 namespace dotnet_dependency_version_checker.MenuOptions;
@@ -54,7 +55,7 @@ public class MenuOptionControls
         Console.WriteLine($"Exit application: {TextContent.ExitOption}\n");
     }
 
-    public async Task<string> HandleDisplayDependencyVersionCheck(string path)
+    public async Task<List<DependencyInformation>> HandleDisplayDependencyVersionCheck(string path)
     {
         // Step 1: call ProjFile service that will parse provided XML file and extract dependency versions
         var projFileService = new ProjFileService();
@@ -64,8 +65,11 @@ public class MenuOptionControls
         var nugetApiClient = new NugetApiClient();
         var dependencyVersionList = await nugetApiClient.GetDependencyVersions(dependencyList.Keys);
         
-        // Step 3: compare those versions and display all dependencies that are outdated
-        return "";
+        // Step 3: compare those versions and compose list of DependencyInformation.cs objects
+        var dependencyAnalyzerService = new DependencyAnalyzerService();
+        var dependencyInformation = dependencyAnalyzerService.AnalyzeDependencies(dependencyList, dependencyVersionList);
+        
+        return dependencyInformation;
     }
 
 
