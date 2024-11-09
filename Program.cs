@@ -21,7 +21,10 @@ do
         var consoleReportGenerator = new ConsoleReportGenerator();
         consoleReportGenerator.GenerateReport(dependencyInformation);
         
-        // Display menu option to generate web report for dependency analysis
+        // Generate web report for the result of dependency analysis
+        var webReportGenerator = new WebReportGenerator();
+        webReportGenerator.GenerateReport(dependencyInformation);
+        
         ShowMainMenu(false);
     }
     else

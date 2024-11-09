@@ -5,7 +5,7 @@ namespace dotnet_dependency_version_checker.service;
 
 public class NugetApiClient
 {
-    private const string ServiceIndexUrl = "https://api.nuget.org/v3/index.json";
+    private const string NugetBaseUrl = "https://api.nuget.org/v3/index.json";
     private const string ServiceIndexUrlSuffix = "/index.json";
 
     /// <summary>
@@ -16,7 +16,7 @@ public class NugetApiClient
         try
         {
             using var client = new HttpClient();
-            var serviceIndexResponse = await client.GetStringAsync(ServiceIndexUrl);
+            var serviceIndexResponse = await client.GetStringAsync(NugetBaseUrl);
 
             var jsonDocument = JsonDocument.Parse(serviceIndexResponse);
             var rootElement = jsonDocument.RootElement;
@@ -70,7 +70,7 @@ public class NugetApiClient
                 throw new InvalidOperationException("The 'versions' array is missing in the NuGet API response.");
             }
             
-            result.Add(packageName, versions.EnumerateArray().ToList().Select(version => version.ToString()).ToList());
+            result.Add(packageName, versions.EnumerateArray().Select(version => version.ToString()).ToList());
         }
 
         return result;
