@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dependency Analysis Report</title>
+</head>
+<body style="font-family: Arial, sans-serif;">
+<h1 style="color: #333; text-align: center;">Dependency Analysis Report</h1>
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <tr>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: center; background-color: #f2f2f2; font-weight: bold;">Dependency Name</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: center; background-color: #f2f2f2; font-weight: bold;">Current Version</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: center; background-color: #f2f2f2; font-weight: bold;">Latest Stable Version</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: center; background-color: #f2f2f2; font-weight: bold;">Latest Preview Version</th>
+        <th style="border: 1px solid #ddd; padding: 8px; text-align: center; background-color: #f2f2f2; font-weight: bold;">Is Up to Date</th>
+    </tr>
+    {{#each this}}
+    <tr>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: center; {{conditionalStyle IsUpToDate}}">
+            {{DependencyName}}
+        </td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{CurrentVersion}}</td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{LatestStableVersion}}</td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{LatestPreviewVersion}}</td>
+        <td style="border: 1px solid #ddd; padding: 8px; text-align: center; {{conditionalStyle IsUpToDate}}">
+            {{#if IsUpToDate}}<span style="color: green;">YES</span>{{else}}<span style="color: red;">NO</span>{{/if}}
+        </td>
+    </tr>
+    {{/each}}
+</table>
+</body>
+</html>

@@ -28,7 +28,7 @@ public class DependencyAnalyzerService {
 
         var preReleaseVersions = versions
             .Where(v => v.Contains('-'))
-            .Select(v => new Version(v.Split('-')[0]))  // Take the main version part for comparison
+            .Select(v => new Version(v.Split('-')[0])) 
             .ToList();
 
         // If no stable versions are found, mark the status as "Outdated"
