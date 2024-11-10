@@ -34,3 +34,13 @@ This tool helps developers maintain dependencies by checking for available updat
 5. **Run the executable: For macOS/Linux, run the executable with:**:
    ```bash
    ./dotnet-dependency-version-checker
+
+## Example 
+
+Showcase of console output and web report
+
+1. **Console output**:
+![image](https://github.com/user-attachments/assets/c527fd92-eff1-4501-b5ce-e083730e30ab)
+
+2. **Web report**:
+![image](https://github.com/user-attachments/assets/7e25bd56-496d-43c5-a712-696a2ebad7d8)
