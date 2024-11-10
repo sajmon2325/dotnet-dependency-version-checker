@@ -36,7 +36,6 @@ public class MenuOptionControls
                     showMenu(false);
                     break;
                 case TextContent.BackOption:
-                    //Control is passed back to the main loop in Program.cs
                     displayMenu = false;
                     break;
                 default:
