@@ -19,7 +19,7 @@ do
 
         // Generate console report for the result of dependency analysis
         var consoleReportGenerator = new ConsoleReportGenerator();
-        consoleReportGenerator.GenerateReport(dependencyInformation);
+        consoleReportGenerator.GenerateReport(dependencyInformation);    
         
         // Generate web report for the result of dependency analysis
         var webReportGenerator = new WebReportGenerator();
