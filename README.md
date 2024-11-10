@@ -15,3 +15,22 @@ The Dependency Version Checker compares the installed versions of dependencies i
 ## Real-Life Use
 
 This tool helps developers maintain dependencies by checking for available updates and deprecated packages. It is especially useful for managing version drift in large or multi-project solutions.
+
+### Build Instructions
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/dotnet-dependency-version-checker.git
+   cd dotnet-dependency-version-checker
+2. **Restore dependencies: Before building the project, restore the required dependencies:**:
+   ```bash
+   dotnet restore
+3. **Build the project: To build the project in release mode, run:**:
+   ```bash
+   dotnet build -c Release
+4. **Publish the project: If you want to publish the project as a self-contained executable (including .NET runtime), use the following command. Replace osx-arm64 with your platform identifier (win-x64, linux-x64, etc.) as needed:**:
+   ```bash
+   dotnet publish -c Release -r osx-arm64 --self-contained
+5. **Run the executable: For macOS/Linux, run the executable with:**:
+   ```bash
+   ./dotnet-dependency-version-checker
