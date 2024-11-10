@@ -25,13 +25,13 @@ This tool helps developers maintain dependencies by checking for available updat
 2. **Restore dependencies: Before building the project, restore the required dependencies:**:
    ```bash
    dotnet restore
-3. **Build the project: To build the project in release mode, run:**:
+3. **Build the project: To build the project in release mode, run:**
    ```bash
    dotnet build -c Release
-4. **Publish the project: If you want to publish the project as a self-contained executable (including .NET runtime), use the following command. Replace osx-arm64 with your platform identifier (win-x64, linux-x64, etc.) as needed:**:
+4. **Publish the project: If you want to publish the project as a self-contained executable (including .NET runtime), use the following command. Replace osx-arm64 with your platform identifier (win-x64, linux-x64, etc.) as needed:**
    ```bash
    dotnet publish -c Release -r osx-arm64 --self-contained
-5. **Run the executable: For macOS/Linux, run the executable with:**:
+5. **Run the executable: For macOS/Linux, run the executable with:**
    ```bash
    ./dotnet-dependency-version-checker
 
