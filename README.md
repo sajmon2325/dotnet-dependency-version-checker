@@ -22,7 +22,7 @@ This tool helps developers maintain dependencies by checking for available updat
    ```bash
    git clone https://github.com/yourusername/dotnet-dependency-version-checker.git
    cd dotnet-dependency-version-checker
-2. **Restore dependencies: Before building the project, restore the required dependencies:**:
+2. **Restore dependencies: Before building the project, restore the required dependencies:**
    ```bash
    dotnet restore
 3. **Build the project: To build the project in release mode, run:**
